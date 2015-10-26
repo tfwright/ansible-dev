@@ -1,0 +1,19 @@
+
+---
+- hosts: all
+  sudo: true
+  vars_files:
+    - vars/defaults.yml
+ 
+  roles:
+    - rbenv 
+
+  pre_tasks:
+    - name: Upgrade packages
+      apt: upgrade=yes update_cache=yes cache_valid_time=300
+      sudo: yes
+    - name: Install libraries
+      apt: pkg={{ item }} state=present
+      with_items:
+        - git
+        - build-essential
