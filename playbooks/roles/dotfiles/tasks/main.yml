@@ -1,0 +1,19 @@
+---
+- name: Ensure dotfiles repository is cloned locally.
+  git:
+    repo: "{{ dotfiles_repo }}"
+    dest: "{{ dotfiles_repo_local_destination }}"
+  sudo: no
+
+- name: Get list of dotfiles
+  shell: "ls -A {{ dotfiles_repo_local_destination }}/files"
+  sudo: no
+  register: dotfiles_files
+
+- name: Link dotfiles into home folder.
+  file:
+    src: "{{ dotfiles_repo_local_destination }}/files/{{ item }}"
+    dest: "{{ dotfiles_home }}/{{ item }}"
+    state: link
+  sudo: no
+  with_items: dotfiles_files.stdout_lines
