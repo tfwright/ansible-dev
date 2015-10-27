@@ -3,11 +3,10 @@
 - hosts: all
   user: tfwright
   sudo: true
-  vars_files:
-    - vars/defaults.yml
  
   roles:
     - { role: rbenv, tags: ["rbenv"] } 
+    - { role: dotfiles, tags: ["dotfiles"] } 
 
   pre_tasks:
     - name: Update apt package cache
