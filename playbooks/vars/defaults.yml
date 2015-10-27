@@ -1,4 +1,0 @@
----
-# Ruby version to install
-global_ruby_version: 2.1.5
-rbenv_makeopts: ""
