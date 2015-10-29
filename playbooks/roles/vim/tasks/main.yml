@@ -1,0 +1,15 @@
+---
+- name: Install vim package
+  apt: pkg=vim state=present
+
+- name: "Create .vim contents"
+  file: path=$item  owner=tfwright state=directory
+  with_items:
+  - /home/tfwright/.vim/autoload
+  - /home/tfwright/.vim/bundle
+
+- name: Vimrc for user '$user'
+  template:
+    src=vimrc.j2
+    dest=/home/tfwright/.vimrc
+    owner=tfwright
