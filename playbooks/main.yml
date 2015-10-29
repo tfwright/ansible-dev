@@ -7,6 +7,7 @@
   roles:
     - { role: rbenv, tags: ["rbenv"] } 
     - { role: dotfiles, tags: ["dotfiles"] } 
+    - { role: vim, tags: ["vim"] } 
 
   pre_tasks:
     - name: Update apt package cache
