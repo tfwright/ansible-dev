@@ -1,2 +1,2 @@
-rbenv_root: /home/tfwright/.rbenv
 ruby_version: 2.1.0
+rbenv_root: /home/{{ dev_user }}/.rbenv

@@ -2,15 +2,12 @@
 ---
 - hosts: all
   user: tfwright
-  sudo: true
+  sudo: false
+  vars:
+    dev_user: tfwright
  
   roles:
-    - { role: rbenv, tags: ["rbenv"] } 
     - { role: dotfiles, tags: ["dotfiles"] } 
+    - { role: rbenv, tags: ["rbenv"] } 
     - { role: vim, tags: ["vim"] } 
 
-  pre_tasks:
-    - name: Update apt package cache
-      apt: update_cache=yes cache_valid_time=3600
-    - name: Upgrade apt packages
-      apt: upgrade=yes update_cache=yes cache_valid_time=300
