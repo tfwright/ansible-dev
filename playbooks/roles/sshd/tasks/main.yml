@@ -12,3 +12,10 @@
 - name: Disallow root SSH access
   lineinfile: dest=/etc/ssh/sshd_config regexp="^PermitRootLogin" line="PermitRootLogin no" state=present
   notify: Restart ssh
+
+- name: "Upload private key"
+  copy:
+    content: "{{ ssh_private_key }}"
+    dest: "/home/tfwright/.ssh/id_rsa"
+    mode: 0600
+    owner: tfwright
