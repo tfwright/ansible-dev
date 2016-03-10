@@ -10,4 +10,5 @@
     - { role: dotfiles, tags: ["dotfiles"] } 
     - { role: rbenv, tags: ["rbenv"] } 
     - { role: vim, tags: ["vim"] } 
+    - { role: postgresql, tags: ["postgresql", "db"] } 
 
