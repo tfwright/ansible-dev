@@ -1,0 +1,44 @@
+---
+- name: Ensure apt supports https
+  apt:
+    update_cache: yes
+    name: "{{ item }}"
+  with_items:
+    - apt-transport-https 
+    - ca-certificates
+    - linux-image-extra-3.13.0-24-generic
+    - apparmor
+  sudo: yes
+
+- name: Add key
+  apt_key: keyserver=hkp://p80.pool.sks-keyservers.net:80 id=58118E89F3A912897C070ADBF76221572C52609D
+  sudo: yes
+
+- name: Add docker repo to sources
+  lineinfile:
+    dest: /etc/apt/sources.list.d/docker.list
+    line: deb https://apt.dockerproject.org/repo ubuntu-trusty main
+    state: present
+    create: yes
+  sudo: yes
+
+- name: Install docker
+  apt:
+    name: docker-engine
+    state: present
+    update_cache: yes
+  sudo: yes
+
+- name: Ensure docker is started
+  service:
+    name: docker
+    state: started
+  sudo: yes
+
+- name: Create docker group
+  group: name=docker state=present
+  sudo: yes
+
+- name: Add docker user to docker group
+  user: name={{ dev_user }} groups=docker
+  sudo: yes
