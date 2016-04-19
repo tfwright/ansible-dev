@@ -20,11 +20,14 @@
 - name: update rbenv repo
   git: repo=git://github.com/sstephenson/rbenv.git dest={{rbenv_root}} version=v0.4.0 accept_hostkey=true
 
+- name: create local config
+  file: path=/home/{{dev_user}}/.bash_local state=touch 
+
 - name: add rbenv to path
-  lineinfile: dest=/home/{{dev_user}}/.bash_profile line="export PATH=$HOME/.rbenv/bin:$PATH"
+  lineinfile: dest=/home/{{dev_user}}/.bash_local line="export PATH=$HOME/.rbenv/bin:$PATH"
 
 - name: Eval rbenv init in ~/.profile
-  lineinfile: dest="~/.bash_profile" line='eval "$(rbenv init -)"'
+  lineinfile: dest="~/.bash_local" line='eval "$(rbenv init -)"'
 
 - name: install ruby-build
   git: repo=git://github.com/sstephenson/ruby-build.git dest={{rbenv_root}}/plugins/ruby-build
