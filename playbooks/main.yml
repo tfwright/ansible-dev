@@ -13,4 +13,5 @@
     - { role: postgresql, tags: ["postgresql", "db"] } 
     - { role: redis, tags: ["redis", "db"] } 
     - { role: docker, tags: ["docker"] } 
+    - { role: phantomjs, tags: ["phantomjs"] }
 
