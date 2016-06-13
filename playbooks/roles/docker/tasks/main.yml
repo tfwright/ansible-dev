@@ -40,5 +40,5 @@
   sudo: yes
 
 - name: Add docker user to docker group
-  user: name={{ dev_user }} groups=docker
+  user: name={{ dev_user }} groups=docker append=yes
   sudo: yes
